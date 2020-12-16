@@ -1,0 +1,21 @@
+{
+  "name": "simulate-traffic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "lodash.chunk": "^4.2.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^12.0.0",
+    "standard": "^12.0.1"
+  }
+}

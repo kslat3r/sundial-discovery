@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sundial-sunshine-traffic-config
+  namespace: sundial
+data:
+  INGRESS_HOST: "35.246.204.159"
+  INGRESS_PORT: "80"
+  INTERVAL: "1000"
+  STEPS: "10"
+

@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sundial-sunshine-traffic
+  labels:
+    app: sundial-sunshine-traffic
+    version: v1.0.0
+    servicemode: primary
+  namespace: sundial
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sundial-sunshine-traffic
+      version: v1.0.0
+  template:
+    metadata:
+      labels:
+        app: sundial-sunshine-traffic
+        version: v1.0.0
+    spec:
+      containers:
+      - name: sundial-sunshine-traffic
+        image: newlinelabs/sundial-sunshine-traffic:latest
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: sundial-sunshine-traffic-config
+      imagePullSecrets:
+      - name: registry-credentials

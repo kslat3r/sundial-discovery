@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dinner-service
+  namespace: api
+spec:
+  selector:
+    app: dinner-service
+  ports:
+  - port: 3000
+    name: http
+  type: ClusterIP
+

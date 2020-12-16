@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: recipes-service
+  labels:
+    app: recipes-service
+    version: v1.0.0
+    servicemode: primary
+  namespace: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recipes-service
+      version: v1.0.0
+  template:
+    metadata:
+      labels:
+        app: recipes-service
+        version: v1.0.0
+    spec:
+      containers:
+      - name: recipes-service
+        image: newlinelabs/sundial-sunshine-recipes:latest
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: sundial-sunshine-recipes-service-config
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+          name: http
+        resources:
+          requests:
+            cpu: 200m
+          limits:
+            cpu: 300m
+        livenessProbe:
+          tcpSocket:
+            port: 3000
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          timeoutSeconds: 1
+        readinessProbe:
+          tcpSocket:
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 1
+        securityContext:
+          privileged: false
+      imagePullSecrets:
+      - name: registry-credentials

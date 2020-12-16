@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="node_modules/jointjs/dist/joint.css"
+    />
+    <link rel="stylesheet" type="text/css" href="recipe.css" />
+  </head>
+  <body>
+    <div class="slidecontainer">
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        class="slider"
+        id="myRange"
+      />
+    </div>
+    <div id="demo"></div>
+    <div id="myholder"></div>
+
+    <!-- dependencies -->
+    <script src="static/external/jquery.js"></script>
+    <script src="static/external/lodash.js"></script>
+    <script src="static/external/backbone.js"></script>
+    <script src="static/external/joint.js"></script>
+    <script src="static/window.js"></script>
+
+    <script type="text/javascript">
+      // Update the current slider value (each time you drag the slider handle)
+      var output = document.getElementById("demo");
+      var slider = document.getElementById("myRange");
+      slider.oninput = showSeconds;
+
+      init();
+      showSeconds();
+
+    </script>
+    <!-- code -->
+  </body>
+</html>

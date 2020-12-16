@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sundial-sunshine-recipes-service-config
+  namespace: api
+data:
+  BREAKFAST_SERVICE_HOSTNAME: "http://breakfast-service:3000"
+  BREAKFAST_SERVICE_PATH: "/api/v1.0/recipes"
+  LUNCH_SERVICE_HOSTNAME: "http://lunch-service:3000"
+  LUNCH_SERVICE_PATH: "/api/v1.0/recipes"
+  DINNER_SERVICE_HOSTNAME: "http://dinner-service:3000"
+  DINNER_SERVICE_PATH: "/api/v1.0/recipes"
+  FIBONACCI: "1000"
+

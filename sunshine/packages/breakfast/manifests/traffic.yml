@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: breakfast-service
+  namespace: api
+spec:
+  host: breakfast-service
+  subsets:
+  - labels:
+      version: v1.0.0
+    name: primary
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: breakfast-service
+  namespace: api
+spec:
+  hosts:
+  - breakfast-service
+  gateways:
+  - ingress-gateway
+  http:
+  - match:
+    - uri:
+        prefix: "/api/v1.0/breakfast"
+    route:
+    - destination:
+        host: breakfast-service.api.svc.cluster.local
+        subset: primary
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+

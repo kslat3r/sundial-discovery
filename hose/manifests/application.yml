@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sundial-hose
+  labels:
+    app: sundial-hose
+    version: v1.0.0
+    servicemode: primary
+  namespace: sundial
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sundial-hose
+      version: v1.0.0
+  template:
+    metadata:
+      labels:
+        app: sundial-hose
+        version: v1.0.0
+    spec:
+      containers:
+      - name: sundial-hose
+        image: newlinelabs/sundial-hose:latest
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: sundial-hose-config
+        volumeMounts:
+        - name: sundial-hose-data
+          mountPath: /data
+        securityContext:
+          privileged: false
+      volumes:
+      - name: sundial-hose-data
+        persistentVolumeClaim:
+          claimName: sundial-hose-storage
+      imagePullSecrets:
+      - name: registry-credentials
+
